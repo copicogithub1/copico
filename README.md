@@ -18,9 +18,9 @@ Port: 17356
 RPC Port: 17358
 
 
-BUILD LINUX (see the [Wiki](https://github.com/Copico/Copico/wiki/Unix-Build) for dependencies)
+BUILD LINUX (see the [Wiki](https://github.com/copicogithub1/copico/wiki/Unix-Build) for dependencies)
 -----------
-1) git clone https://github.com/Copico/Copico.git Copico
+1) git clone https://github.com/copicogithub1/copico.git Copico
 
 2) cd Copico/src
 
@@ -38,9 +38,9 @@ BUILD LINUX (see the [Wiki](https://github.com/Copico/Copico/wiki/Unix-Build) fo
 BUILD WINDOWS
 -------------
 
-1) Download Qt.zip from https://github.com/Copico/Copico/releases/tag/v1.0 and unpack to C:/
+1) Download Qt.zip from https://github.com/copicogithub1/copico/releases/tag/v1.0 and unpack to C:/
 
-2) Download Copico source from https://github.com/Copico/Copico/archive/master.zip 
+2) Download Copico source from https://github.com/copicogithub1/copico/archive/master.zip 
 
 2.1) Unpack to C:/Copico
 
