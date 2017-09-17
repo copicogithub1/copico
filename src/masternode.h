@@ -30,7 +30,7 @@ class uint256;
 #define MASTERNODE_SYNC_IN_PROCESS             8
 #define MASTERNODE_REMOTELY_ENABLED            9
 
-#define MASTERNODE_MIN_CONFIRMATIONS           20
+#define MASTERNODE_MIN_CONFIRMATIONS           10
 #define MASTERNODE_MIN_DSEEP_SECONDS           (30*60)
 #define MASTERNODE_MIN_DSEE_SECONDS            (5*60)
 #define MASTERNODE_PING_SECONDS                (1*60) //(1*60)
@@ -58,7 +58,7 @@ int CountMasternodesAboveProtocol(int protocolVersion);
 void ProcessMessageMasternode(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
 
 //
-// The Masternode Class. For managing the darksend process. It contains the input of the 5000 Copico, signature to prove
+// The Masternode Class. For managing the darksend process. It contains the input of the 50000 Copico, signature to prove
 // it's the one who own that ip address and code for calculating the payment election.
 //
 class CMasterNode

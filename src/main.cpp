@@ -46,7 +46,7 @@ CBigNum bnProofOfStakeLimitV2(~uint256(0) >> 24);
 unsigned int nStakeMinAge = 12 * 60 * 60; // 12 hours
 unsigned int nModifierInterval = 3 * 60; // time to elapse before new modifier is computed
 
-int nCoinbaseMaturity = 6;
+int nCoinbaseMaturity = 10;
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 
