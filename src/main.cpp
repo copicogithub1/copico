@@ -46,7 +46,7 @@ CBigNum bnProofOfStakeLimitV2(~uint256(0) >> 24);
 unsigned int nStakeMinAge = 12 * 60 * 60; // 12 hours
 unsigned int nModifierInterval = 3 * 60; // time to elapse before new modifier is computed
 
-int nCoinbaseMaturity = 10;
+int nCoinbaseMaturity = 20;
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 
@@ -1150,7 +1150,206 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
 // miner's coin stake reward based on coin age spent (coin-days)
 int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
 {
-    int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+    //int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+	
+	int64_t nSubsidy = 5 * COIN;
+
+    if(nBestHeight <= 24960)
+	{
+		nSubsidy = 10;
+	}
+	else if (nBestHeight <= 26880)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 31680)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 33600)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 38400)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 40320)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 45120)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 47040)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 51840)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 53760)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 58560)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 60480)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 65280)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 67200)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 72000)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 73920)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 78720)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 80640)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 85440)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 87360)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 92160)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 94080)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 98880)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 100800)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 105600)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 107520)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 112320)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 114240)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 119040)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 120960)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 125760)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 127680)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 132480)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 134400)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 139200)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 141120)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 145920)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 147840)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 152640)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 154560)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 159360)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 161280)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 166080)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 168000)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 172800)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 174720)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 179520)
+	{
+		nSubsidy = 10 ;
+	}
+	else if (nBestHeight <= 181440)
+	{
+		nSubsidy = 15 ;
+	}
+	else if (nBestHeight <= 3504000)
+	{
+		nSubsidy = 10 ;
+	}
 
     LogPrint("creation", "GetProofOfStakeReward(): create=%s nCoinAge=%d\n", FormatMoney(nSubsidy), nCoinAge);
 
@@ -4257,7 +4456,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
 
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue)
 {
-    int64_t ret = blockValue * 0.50; //50% for masternodes
+    int64_t ret = blockValue * 0.70; //50% for masternodes
 
     return ret;
 }
