@@ -46,7 +46,15 @@ CBigNum bnProofOfStakeLimitV2(~uint256(0) >> 24);
 unsigned int nStakeMinAge = 12 * 60 * 60; // 12 hours
 unsigned int nModifierInterval = 3 * 60; // time to elapse before new modifier is computed
 
-int nCoinbaseMaturity = 20;
+
+// Block at which COINBASE_MATURITY_NEW comes into effect
+int COINBASE_MATURITY_SWITCH = 24961;
+
+//Coinbase maturity after block 1011
+int COINBASE_MATURITY_NEW = 20;
+
+int nCoinbaseMaturity = 11;
+
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 
@@ -926,12 +934,29 @@ int CMerkleTx::GetDepthInMainChain(CBlockIndex* &pindexRet) const
     return nResult;
 }
 
+int CMerkleTx::GetHeightInMainChain(CBlockIndex* &pindexRet) const
+{
+    return GetDepthInMainChain(pindexRet) + pindexBest->nHeight - 1;
+}
+
+/* int CMerkleTx::GetBlocksToMaturity() const
+{
+    if (!(IsCoinBase() || IsCoinStake()))
+        return 0;
+    return max(0, (nCoinbaseMaturity+0) - GetDepthInMainChain());
+} */
+
 int CMerkleTx::GetBlocksToMaturity() const
 {
     if (!(IsCoinBase() || IsCoinStake()))
         return 0;
-    return max(0, (nCoinbaseMaturity+1) - GetDepthInMainChain());
+    	
+    if(GetHeightInMainChain() >= COINBASE_MATURITY_SWITCH)
+        return max(0, (COINBASE_MATURITY_NEW+0) - GetDepthInMainChain());
+    else
+        return max(0, (nCoinbaseMaturity+0) - GetDepthInMainChain());
 }
+
 
 
 bool CMerkleTx::AcceptToMemoryPool(bool fLimitFree)
@@ -1684,10 +1709,14 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs, map<uint256, CTx
                 return DoS(100, error("ConnectInputs() : %s prevout.n out of range %d %u %u prev tx %s\n%s", GetHash().ToString(), prevout.n, txPrev.vout.size(), txindex.vSpent.size(), prevout.hash.ToString(), txPrev.ToString()));
 
             // If prev is coinbase or coinstake, check that it's matured
-            if (txPrev.IsCoinBase() || txPrev.IsCoinStake())
-                for (const CBlockIndex* pindex = pindexBlock; pindex && pindexBlock->nHeight - pindex->nHeight < nCoinbaseMaturity; pindex = pindex->pprev)
+            if (txPrev.IsCoinBase() || txPrev.IsCoinStake()) {
+				int cMaturity = nCoinbaseMaturity;
+				if(pindexBlock->nHeight >= COINBASE_MATURITY_SWITCH)
+					cMaturity = COINBASE_MATURITY_NEW;
+                for (const CBlockIndex* pindex = pindexBlock; pindex && pindexBlock->nHeight - pindex->nHeight < cMaturity; pindex = pindex->pprev)
                     if (pindex->nBlockPos == txindex.pos.nBlockPos && pindex->nFile == txindex.pos.nFile)
                         return error("ConnectInputs() : tried to spend %s at depth %d", txPrev.IsCoinBase() ? "coinbase" : "coinstake", pindexBlock->nHeight - pindex->nHeight);
+			}
 
             // ppcoin: check transaction timestamp
             if (txPrev.nTime > nTime)
